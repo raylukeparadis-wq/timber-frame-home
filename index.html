@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Timber frame home designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/app.css">
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Timber frame home designer</h1>
+      <p class="summary" id="summary"></p>
+    </div>
+    <input id="name" type="text" aria-label="Design name" maxlength="80">
+  </header>
+
+  <div class="layout">
+    <section class="stage" aria-label="Frame drawings">
+      <div class="tabs" id="tabs">
+        <div role="tablist">
+          <button type="button" role="tab" data-view="3d">3D frame</button>
+          <button type="button" role="tab" data-view="bent">Bent</button>
+          <button type="button" role="tab" data-view="side">Side wall</button>
+          <button type="button" role="tab" data-view="plan">Plan</button>
+        </div>
+        <select id="bentpick" aria-label="Bent to draw" hidden></select>
+      </div>
+      <ul class="alerts" id="alerts" hidden></ul>
+      <div class="view">
+        <canvas id="c3d" tabindex="0" aria-label="3D view of the frame. Drag or use arrow keys to orbit."></canvas>
+        <svg id="svg2d" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Frame drawing"></svg>
+        <div class="hint" id="hint"></div>
+        <div class="zoombar">
+          <button type="button" id="zout" aria-label="Zoom out">−</button>
+          <button type="button" id="zin" aria-label="Zoom in">+</button>
+          <button type="button" id="zreset">Fit</button>
+        </div>
+      </div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <aside class="panel" aria-label="Design controls">
+      <h2>Design</h2>
+      <div class="btnrow">
+        <button type="button" id="undo" disabled>Undo</button>
+        <button type="button" id="redo" disabled>Redo</button>
+        <button type="button" id="copydesign" class="primary">Copy design</button>
+        <label class="filebtn" for="openfile">Open file…</label>
+        <input type="file" id="openfile" accept=".json,application/json" hidden>
+      </div>
+      <p class="note" id="filemsg" role="status"></p>
+      <details class="designbox" id="designbox">
+        <summary>Paste a design</summary>
+        <textarea id="designtext" aria-label="Design JSON" spellcheck="false" placeholder="Paste design JSON here"></textarea>
+        <div class="btnrow"><button type="button" id="applydesign" class="primary">Load pasted design</button></div>
+      </details>
+      <p class="note" style="margin:0 0 6px">Start from a layout</p>
+      <div class="btnrow" id="presets"></div>
+      <div id="controls"></div>
+    </aside>
+
+    <div class="results">
+      <section class="card" aria-labelledby="h-sum">
+        <h2 id="h-sum">At a glance</h2>
+        <div class="stats" id="stats"></div>
+      </section>
+      <section class="card" aria-labelledby="h-chk">
+        <h2 id="h-chk">Sizing checks <span id="checkcount" class="badge"></span></h2>
+        <div id="checks"></div>
+      </section>
+      <section class="card" aria-labelledby="h-tim">
+        <h2 id="h-tim">Timber list</h2>
+        <div class="btnrow"><button type="button" id="copycsv">Copy as CSV</button></div>
+        <div id="timber"></div>
+      </section>
+      <section class="card" aria-labelledby="h-joi">
+        <h2 id="h-joi">Joinery schedule</h2>
+        <div id="joinery"></div>
+      </section>
+    </div>
+  </div>
+  <footer>A layout and estimating tool. Massachusetts requires a permit for a new home; have the frame reviewed by an engineer and confirm snow and wind loads with your building department.</footer>
+</div>
+<script src="js/data.js"></script>
+<script src="js/geom.js"></script>
+<script src="js/frame.js"></script>
+<script src="js/schedule.js"></script>
+<script src="js/checks.js"></script>
+<script src="js/view3d.js"></script>
+<script src="js/view2d.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
